@@ -2,7 +2,7 @@
     <div class="container">
         <div class="items-left">
             <img src="@/assets/cnodejs_light.svg" class="logo"/>
-            <input type="text" class="search">
+            <!-- <input type="text" class="search"> -->
         </div>
 
         <ul class="items-right">
@@ -43,8 +43,12 @@ export default {
             margin-left: 20px;
             border-radius: 50px;
             border: none;
-            text-indent: 1.5em;
-            width: 235px;
+            /* text-indent: 1.5em; */
+            width: 233px;
+            height: 26px;
+            background: #888888;
+            padding: 3px 5px 3px 22px ;
+
         }
     }
     .items-right{
@@ -55,6 +59,15 @@ export default {
             padding: 10px 15px;
             white-space: nowrap;
         }
+    }
+}
+
+@keyframes colorChange{
+    form{
+        background: #888888;
+    }
+    to{
+        background: white;
     }
 }
 </style>

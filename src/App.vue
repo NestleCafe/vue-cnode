@@ -1,13 +1,16 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
+    <post-list></post-list>
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar'
+import PostList from './components/PostList'
 export default {
-  components:{ NavBar},
+  
+  components:{ NavBar, PostList},
 }
 </script>
 
