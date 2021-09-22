@@ -35,7 +35,7 @@
                         </div>
 
                         <a :href="'https://cnodejs.org/topic/'+ item.id" class="item-right">
-                            {{ calcTime(item.last_reply_at) }}
+                            {{ timeToNow(item.last_reply_at) }}
                         </a>
                     </div>
                 </div>
@@ -48,6 +48,7 @@
 import { getPostList } from '@/api/index'
 import Loading from './Loading'
 import Category from './Category'
+import timeToNow from '@/utils/timeToNow'
 
 export default {
     name: 'PostList',
@@ -62,22 +63,17 @@ export default {
         }
     },
     methods: {
+        timeToNow,
         async getPostList(){
             const res = await getPostList()
             const data = res.data.data
             this.postList = data
             this.isLoading = false
         },
-        calcTime(date){
-            return this.$dayjs(date).toNow().replace('内', '前')
-        },
-    },
-    computed: {
-
     },
     mounted() {
         this.getPostList()
-    }
+    },
 }
 </script>
 
@@ -165,6 +161,4 @@ $borderRadius: 3px;
         }
     }
 }
-    
-
 </style>
