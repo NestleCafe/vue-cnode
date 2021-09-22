@@ -1,19 +1,16 @@
 <template>
     <div class="container">
 
-        <div class="loading" v-if="isLoading">
-            <img src="@/assets/loading.gif" style="margin-top: 50vh; margin-left: 50vw;"/>
-        </div>
+        <Loading v-if="isLoading"></Loading>
 
-    
         <ul class="postList" v-else>
             <li class="header">
                 <p>全部</p>
-                <p>精华</p>
-                <p>分享</p>
-                <p>问答</p>
-                <p>招聘</p>
-                <p>客户端测试</p>
+                <p><a href="https://cnodejs.org/?tab=good">精华</a></p>
+                <p><a href="https://cnodejs.org/?tab=share">分享</a></p>
+                <p><a href="https://cnodejs.org/?tab=ask">问答</a></p>
+                <p><a href="https://cnodejs.org/?tab=job">招聘</a></p>
+                <p><a href="https://cnodejs.org/?tab=dev">客户端测试</a></p>
             </li>
 
             <li class="content" v-for="item in postList" :key="item.id">
@@ -23,9 +20,7 @@
                     </a>
 
                 <!-- 分类 -->
-                <span class="classify" :class="calcClass(item)[0]">
-                    {{calcClass(item)[1]}}
-                </span>
+                <Category :data="item"></Category>
 
                 <!-- 文字 -->
                 <div class="text">
@@ -46,15 +41,17 @@
                 </div>
             </li>
         </ul>
-
-
     </div>
 </template>
 
 <script>
 import { getPostList } from '@/api/index'
+import Loading from './Loading'
+import Category from './Category'
 
 export default {
+    name: 'PostList',
+    components: { Loading, Category },
     data(){
         return{
             isLoading: true,
@@ -74,17 +71,6 @@ export default {
         calcTime(date){
             return this.$dayjs(date).toNow().replace('内', '前')
         },
-        calcClass(val){
-            if(val.good){
-                return ['abnormal', '精华']
-            }else if(val.top){
-                return ['abnormal', '置顶']
-            }else if(val.tab === 'share'){
-                return ['normal', '分享']
-            }else if(val.tab === 'ask'){
-                return ['normal', '问答']
-            }
-        },
     },
     computed: {
 
@@ -98,10 +84,8 @@ export default {
 <style lang="scss" scoped>
 $borderRadius: 3px;
 
-
 .postList{
     margin: 20px auto 0 auto;
-    width: 75vw;
     min-width: 635px;
 }
 
@@ -117,12 +101,14 @@ $borderRadius: 3px;
         margin: 10px;
         padding: 3px 4px;
         color: #80bd01;
-
-    }
-    p:first-child{
-        background: #80bd01;
-        color: white;
-        border-radius: $borderRadius;
+        &:first-child{
+            background: #80bd01;
+            color: white;
+            border-radius: $borderRadius;
+        }
+        &:not(:first-child):hover{
+            color: #005580;
+        }
     }
 }
 .content{
@@ -140,24 +126,7 @@ $borderRadius: 3px;
         margin-right: 10px;
         border-radius: $borderRadius;
     }
-    .classify{
-        font-size: 12px;
-        display: inline;
-        padding: 2px 4px;  
-        border-radius: $borderRadius;
-        height: 18px;
-        display: flex;
-        align-items: center;
 
-        &.normal{
-            background-color: #e5e5e5;
-            color: #999;
-        }
-        &.abnormal{
-            background: #80bd01;
-            color: white;
-        }
-    }
     .text{
         margin-left: 10px;
         .title{
@@ -197,6 +166,5 @@ $borderRadius: 3px;
     }
 }
     
-
 
 </style>

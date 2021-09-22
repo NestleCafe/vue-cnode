@@ -2,7 +2,11 @@
     <div class="container">
         <div class="items-left">
             <img src="@/assets/cnodejs_light.svg" class="logo"/>
-            <!-- <input type="text" class="search"> -->
+            <!-- <form method="get" action="https://www.google.com.hk/search" >
+                <input name="q" type="text" class="search">
+            
+            </form> -->
+            <!-- {{site:cnodejs.org}} -->
         </div>
 
         <ul class="items-right">
@@ -19,7 +23,6 @@
 <script>
 export default {
     name: 'Header',
-    
 }
 </script>
 
@@ -46,8 +49,9 @@ export default {
             /* text-indent: 1.5em; */
             width: 233px;
             height: 26px;
-            background: #888888;
+            /* background: #888888; */
             padding: 3px 5px 3px 22px ;
+            
 
         }
     }

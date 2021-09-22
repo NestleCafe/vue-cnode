@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <post-list></post-list>
+    <div class="main">
+      <post-list></post-list>
+      </div>
   </div>
 </template>
 
@@ -18,6 +20,10 @@ export default {
 @import "~@/assets/style/reset.scss";
 body{
   background: #E1E1E1;
+}
+.main{
+  width: 80%;
+  margin: auto;
 }
 /*     &.router-link-exact-active {
       color: #42b983;
