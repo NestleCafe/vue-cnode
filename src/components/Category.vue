@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$borderRadius: 3px;
+@import "~@/assets/style/helper.scss";
 
 .category{
     font-size: 12px;
@@ -33,12 +33,11 @@ $borderRadius: 3px;
     padding: 2px 4px;  
     border-radius: $borderRadius;
     height: 18px;
-    min-width: 32px;
-    display: flex;
-    align-items: center;
-
+    width: 32px;
+    line-height: 12px;
+    white-space: nowrap;
     &.normal{
-        background-color: #e5e5e5;
+        background: $borderColor;
         color: #999;
     }
     &.salient{

@@ -1,32 +1,34 @@
 <template>
     <div class="container">
-
         <Loading v-if="isLoading"></Loading>
 
         <ul class="postList" v-else>
             <li class="header">
-                <p>全部</p>
-                <p><a href="https://cnodejs.org/?tab=good">精华</a></p>
-                <p><a href="https://cnodejs.org/?tab=share">分享</a></p>
-                <p><a href="https://cnodejs.org/?tab=ask">问答</a></p>
-                <p><a href="https://cnodejs.org/?tab=job">招聘</a></p>
-                <p><a href="https://cnodejs.org/?tab=dev">客户端测试</a></p>
+                <p v-for="(item, index) in headerContent"
+                    :key="index"
+                    @click="handleClick(item, index)"
+                    :class="{selected: headerIndex === index}"
+                >
+                    {{item.text}}
+                </p>
             </li>
 
             <li class="content" v-for="item in postList" :key="item.id">
                 <!-- 头像 -->
-                    <a :href="'https://cnodejs.org/user/'+item.author.loginname">
-                        <img :src="item.author.avatar_url" :title="item.author.loginname">
-                    </a>
+                <a :href="'https://cnodejs.org/user/'+item.author.loginname">
+                    <img :src="item.author.avatar_url" :title="item.author.loginname">
+                </a>
 
                 <!-- 分类 -->
                 <Category :data="item"></Category>
 
                 <!-- 文字 -->
                 <div class="text">
-                    <a :href="'https://cnodejs.org/topic/'+ item.id" :title="item.title">
+                    <router-link :to="`/topic/${item.id}`" 
+                        :title="item.title"
+                    >
                         <p class="title">{{item.title}}</p>
-                    </a>
+                    </router-link>
                     <div class="info">
                         <div class="item-left">
                             <p class="reply_count">{{item.reply_count}}</p>
@@ -34,9 +36,9 @@
                             <p class="visit_count">{{item.visit_count}}</p>
                         </div>
 
-                        <a :href="'https://cnodejs.org/topic/'+ item.id" class="item-right">
+                        <span class="item-right">
                             {{ timeToNow(item.last_reply_at) }}
-                        </a>
+                        </span>
                     </div>
                 </div>
             </li>
@@ -46,8 +48,9 @@
 
 <script>
 import { getPostList } from '@/api/index'
-import Loading from './Loading'
-import Category from './Category'
+import headerContent from '@/utils/headerContent'
+import Loading from '@/components/Loading'
+import Category from '@/components/Category'
 import timeToNow from '@/utils/timeToNow'
 
 export default {
@@ -55,30 +58,39 @@ export default {
     components: { Loading, Category },
     data(){
         return{
+            //是否加载
             isLoading: true,
+            //列表头导航
+            headerContent,
+            //选中的列表头
+            headerIndex: 0,
             //页面列表数据
             postList: [],
-            postContent: [],
-            dayjs: this.$dayjs
+
         }
     },
     methods: {
         timeToNow,
-        async getPostList(){
-            const res = await getPostList()
+        async getPostList(tab){
+            tab = tab || 'all'
+            const res = await getPostList(tab)
             const data = res.data.data
             this.postList = data
             this.isLoading = false
         },
+        handleClick(item, index){
+            this.headerIndex = index
+            /* this.getPostList(item.tab) */
+        }
     },
     mounted() {
-        this.getPostList()
+        this.getPostList('ask')
     },
 }
 </script>
 
 <style lang="scss" scoped>
-$borderRadius: 3px;
+@import "~@/assets/style/helper.scss";
 
 .postList{
     margin: 20px auto 0 auto;
@@ -97,12 +109,12 @@ $borderRadius: 3px;
         margin: 10px;
         padding: 3px 4px;
         color: #80bd01;
-        &:first-child{
+        &.selected{
             background: #80bd01;
             color: white;
             border-radius: $borderRadius;
         }
-        &:not(:first-child):hover{
+        &:not(.selected):hover{
             color: #005580;
         }
     }
@@ -111,7 +123,7 @@ $borderRadius: 3px;
     padding: 10px;
     height: 50px;
     border-bottom: 1px solid #F0F0F0;
-    background: #FFFFFF;
+    background: white;
     display: flex;
     position: relative;
     &:hover{
@@ -129,14 +141,7 @@ $borderRadius: 3px;
             color: #888; 
             text-align: center;
 
-            /*弹性伸缩盒模型*/
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            /*限制一个块元素显示的文本行数*/
-            -webkit-line-clamp: 1;
-            /*设置伸缩盒对象的子元素排列方式*/
-            -webkit-box-orient: vertical;
+            @extend %textOverFlow;
         }
         .info{
             font-size: 10px;

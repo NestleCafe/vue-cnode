@@ -1,0 +1,22 @@
+$backgroundColor: #E1E1E1;
+$borderColor: #E5E5E5;
+$borderRadius: 3px;
+
+%textOverFlow{
+    /*弹性伸缩盒模型*/
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*限制一个块元素显示的文本行数*/
+    -webkit-line-clamp: 1;
+    /*设置伸缩盒对象的子元素排列方式*/
+    -webkit-box-orient: vertical;
+}
+
+%clearFix{
+    &::after{
+        content: "";
+        display: block;
+        clear: both;
+      }
+}

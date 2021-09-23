@@ -2,24 +2,26 @@
   <div id="app">
     <nav-bar></nav-bar>
     <div class="main">
-      <post-list></post-list>
-      </div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar'
-import PostList from './components/PostList'
+
 export default {
   
-  components:{ NavBar, PostList},
+  components:{ NavBar },
 }
 </script>
 
 <style lang="scss">
 @import "~@/assets/style/reset.scss";
+@import "~@/assets/style/helper.scss";
+
 body{
-  background: #E1E1E1;
+  background: $backgroundColor;
 }
 .main{
   width: 80%;
