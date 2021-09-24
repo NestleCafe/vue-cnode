@@ -15,9 +15,9 @@
 
             <li class="content" v-for="item in postList" :key="item.id">
                 <!-- 头像 -->
-                <a :href="'https://cnodejs.org/user/'+item.author.loginname">
+                <router-link :to="`/user/${item.author.loginname}`">
                     <img :src="item.author.avatar_url" :title="item.author.loginname">
-                </a>
+                </router-link>
 
                 <!-- 分类 -->
                 <Category :data="item"></Category>
@@ -59,7 +59,7 @@ export default {
     data(){
         return{
             //是否加载
-            isLoading: true,
+            isLoading: null,
             //列表头导航
             headerContent,
             //选中的列表头
@@ -73,6 +73,7 @@ export default {
         timeToNow,
         async getPostList(tab){
             tab = tab || 'all'
+            this.isLoading = true
             const res = await getPostList(tab)
             const data = res.data.data
             this.postList = data
@@ -99,8 +100,8 @@ export default {
 
 .header{
     display: flex;
-    font-size: 14px;
     padding: 10px;
+    font-size: 14px;
     height: 40px;
     background: #F6F6F6;
     align-items: center;
@@ -140,8 +141,8 @@ export default {
         .title{
             color: #888; 
             text-align: center;
-
             @extend %textOverFlow;
+            font-size: 16px;
         }
         .info{
             font-size: 10px;

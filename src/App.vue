@@ -27,8 +27,4 @@ body{
   width: 80%;
   margin: auto;
 }
-/*     &.router-link-exact-active {
-      color: #42b983;
-    } */
-
 </style>

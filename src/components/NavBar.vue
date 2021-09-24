@@ -41,6 +41,8 @@ export default {
         .logo{
             width: 120px;
             margin-left: 50px;
+            /*  无法拖拽 */
+            -webkit-user-drag: none;
         }
         .search{
             margin-left: 20px;
@@ -51,8 +53,6 @@ export default {
             height: 26px;
             /* background: #888888; */
             padding: 3px 5px 3px 22px ;
-            
-
         }
     }
     .items-right{
@@ -66,12 +66,12 @@ export default {
     }
 }
 
-@keyframes colorChange{
-    form{
+/* @keyframes colorChange{
+    from{
         background: #888888;
     }
     to{
         background: white;
     }
-}
+} */
 </style>

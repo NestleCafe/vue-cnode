@@ -20,13 +20,14 @@ export default {
     components: { Loading, TopicHeader, TopicReply },
     data(){
         return {
-            isLoading: true,
+            isLoading: null,
             //当前文章页数据
             postData: {}
         }
     },
     methods: {
         async getArticleDate(id){
+            this.isLoading = true
             const res = await getArticleDate(id)
             this.postData = res.data.data
             this.isLoading = false
@@ -46,7 +47,6 @@ export default {
     },
     mounted() {
         this.getArticleDate(this.$route.params.id)
-        console.log(this.$route.params.id)
     },
 }
 </script>

@@ -1,26 +1,26 @@
 <template>
-  <div class="topic_reply">
+  <div class="topic_reply" >
     <div class="header">{{ postData.reply_count }} 回复</div>
 
     <div class="reply">
       <ul>
         <li v-for="(item, index) in postData.replies" :key="index">
-          <a :href="'https://cnodejs.org/user/' + item.author.loginname">
+          <router-link :to="`/user/${item.author.loginname}`">
             <img :src="item.author.avatar_url" :title="item.author.loginname" />
-          </a>
+          </router-link>
           <div class="userInfo">
             <div class="item-left">
               <span class="author">
-                <a :href="'https://cnodejs.org/user/' + item.author.loginname">
+                <router-link :to="`/user/${item.author.loginname}`">
                   {{ item.author.loginname }}
-                </a>
+                </router-link>
               </span>
               <span class="replyTime">
                 {{ index + 1 }}楼• {{ timeToNow(item.create_at) }}
               </span>
             </div>
             <div class="item-right">
-              <img src="@/assets/up.svg" />
+              <icon name='up'></icon>
               <span class="text">{{ item.ups.length }}</span>
             </div>
           </div>
@@ -100,15 +100,12 @@ export default {
                 .item-right{
                     color: gray;
                     font-size: 15px;
-                    img{
-                        text-align: center;
-                        /*  无法拖拽 */
-                        -webkit-user-drag: none;
-                        width: 18px;
-                        display: block;
-                        margin-top: -6px;
-                        margin-left: -20px;
+                    .icon{
+                      font-size: 18px;
+                      margin-right: 5px;
                     }
+                    /*  无法拖拽 */
+                    /* -webkit-user-drag: none; */
                 }
             }
             .reply-content{

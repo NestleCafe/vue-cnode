@@ -9,9 +9,9 @@
         <li>发布于 {{ timeToNow(postData.create_at) }}</li>
         <li>
           作者
-          <a :href="'https://cnodejs.org/user/' + postData.loginname">
+          <router-link :to="`/user/${postData.loginname}`">
             {{ postData.author.loginname }}
-          </a>
+          </router-link>
         </li>
         <li>{{ postData.visit_count }} 次浏览</li>
         <li>来自 {{ comeFrom }}</li>
