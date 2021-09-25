@@ -3,8 +3,8 @@
         <Loading v-if="isLoading"></Loading>
 
         <div class="content" v-else>
-            <topic-header :postData="postData"></topic-header>
-            <topic-reply :postData="postData"></topic-reply>
+                <topic-header :postData="postData"></topic-header>
+                <topic-reply :postData="postData"></topic-reply>
         </div>
     </div>
 </template>
@@ -22,7 +22,7 @@ export default {
         return {
             isLoading: null,
             //当前文章页数据
-            postData: {}
+            postData: {},
         }
     },
     methods: {
@@ -33,19 +33,7 @@ export default {
             this.isLoading = false
         }, 
     },
-    computed: {
-        comeFrom(){
-            const tab = this.postData.tab
-            if(tab === 'share'){
-                return '分享'
-            }else if(tab === 'ask'){
-                return '问答'
-            }else{
-                return null
-            }
-        },
-    },
-    mounted() {
+    created() {
         this.getArticleDate(this.$route.params.id)
     },
 }

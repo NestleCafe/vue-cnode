@@ -25,6 +25,7 @@ body{
 }
 .main{
   width: 80%;
+  min-width: 635px;
   margin: auto;
 }
 </style>

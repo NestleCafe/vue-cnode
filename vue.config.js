@@ -19,7 +19,7 @@ module.exports = {
         .tap(options => ({...options, plugins: [{removeAttrs: {attrs: 'fill'}}]})).end()
     config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite: true}])
     config.module.rule('svg').exclude.add(dir) // 其他svg loader排除icons目录
-    /* 去除svg的fill，以便CSS设置color */
+
 
   },
   /* END */

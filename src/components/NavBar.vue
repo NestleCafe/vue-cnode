@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="items-left">
-            <img src="@/assets/cnodejs_light.svg" class="logo"/>
+            <router-link :to="'/'"><img src="@/assets/cnodejs_light.svg" class="logo"/></router-link>
             <!-- <form method="get" action="https://www.google.com.hk/search" >
                 <input name="q" type="text" class="search">
             
@@ -27,6 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
 .container{
     min-height: 50px;
     background: #444444;
@@ -35,7 +36,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     .items-left{
-        padding: 10px 0;
+        padding: $globalPadding 0;
         display: flex;
         justify-content: space-between;
         .logo{
@@ -60,7 +61,7 @@ export default {
         color: #ccc;
         display: flex;
         li{
-            padding: 10px 15px;
+            padding: $globalPadding 15px;
             white-space: nowrap;
         }
     }
