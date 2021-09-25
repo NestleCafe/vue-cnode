@@ -21,3 +21,17 @@ $globalPadding: 10px;
         clear: both;
       }
 }
+
+%initialCSS{
+    *{
+        margin: initial;
+        padding: initial;
+    }
+    ul,ol{
+        list-style: initial;
+        margin-left: 1em;
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-weight: initial;
+    }
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Loading v-if="isLoading"></Loading>
-    <post-list-component :postData="postList" v-else>
+    <topics-list-component :postData="postList" v-else>
       <template v-slot:header>
         <span
           v-for="(item, index) in headerContent"
@@ -13,7 +13,7 @@
           {{ item.text }}
         </span>
       </template>
-    </post-list-component>
+    </topics-list-component>
   </div>
 </template>
 
@@ -22,11 +22,11 @@ import { getPostList } from "@/api/index";
 import headerContent from "@/utils/PostList/headerContent";
 import Loading from "@/components/Loading";
 import timeToNow from "@/utils/timeToNow";
-import PostListComponent from "@/components/postListComponent.vue";
+import TopicsListComponent from "@/components/TopicsListComponent.vue";
 
 export default {
   name: "PostList",
-  components: { Loading, PostListComponent },
+  components: { Loading, TopicsListComponent },
   data() {
     return {
       //是否加载

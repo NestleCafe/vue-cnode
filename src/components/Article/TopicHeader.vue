@@ -1,24 +1,33 @@
 <template>
-  <div>
-    <div class="topic_header">
-      <div class="topic_title">
-        <span class="Category"><Category :data="postData"></Category></span>
-        <span class="title">{{ postData.title }}</span>
-      </div>
-      <ul class="articleInfo">
-        <li>发布于 {{ timeToNow(postData.create_at) }}</li>
-        <li>
-          作者
-          <router-link :to="`/user/${postData.loginname}`">
-            {{ postData.author.loginname }}
-          </router-link>
-        </li>
-        <li>{{ postData.visit_count }} 次浏览</li>
-        <li>来自 {{ comeFrom }}</li>
-      </ul>
-    </div>
-    <div class="topic_content" v-html="postData.content"></div>
-  </div>
+<div class="topicHeaderWrapper">
+    <basic-container>
+      <template v-slot:header>
+        <div class="topicHeader">
+          <div class="topic_title">
+            <span class="Category">
+              <Category :data="postData"></Category>
+            </span>
+            <span class="title">{{ postData.title }}</span>
+          </div>
+          <ul class="articleInfo">
+            <li>发布于 {{ timeToNow(postData.create_at) }}</li>
+            <li>
+              作者
+              <router-link :to="`/user/${postData.loginname}`">
+                {{ postData.author.loginname }}
+              </router-link>
+            </li>
+            <li>{{ postData.visit_count }} 次浏览</li>
+            <li>来自 {{ comeFrom }}</li>
+          </ul>
+        </div>
+      </template>
+
+      <template v-slot:main>
+        <div class="topic_content" v-html="postData.content"></div>
+      </template>
+    </basic-container>
+</div>
 </template>
 
 <script>
@@ -49,18 +58,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
-.topic_header {
-  background: #ffffff;
-  padding: $globalPadding;
-  min-height: 64px;
-  color: #333;
-  font-size: 22px;
-  font-weight: 700;
-  margin-top: 8px;
-  border-bottom: 1px solid #e5e5e5;
-  border-radius: $borderRadius $borderRadius 0 0;
+.topicHeader{
+  display: flex;
+  flex-direction: column;
   .topic_title {
-    display: flex;
+    color: #333;
+    font-size: 22px;
+    font-weight: 700;
     margin: 8px 0;
     position: relative;
     .Category {
@@ -90,7 +94,15 @@ export default {
   background: white;
   padding: $globalPadding;
 }
-.topic_content::v-deep img {
-  max-width: 100%;
+.topicHeaderWrapper::v-deep{
+  .container .header{
+    background: white;
+  }
+}
+.topic_content::v-deep{ 
+  @extend %initialCSS;
+  img {
+    max-width: 100%;
+  }
 }
 </style>

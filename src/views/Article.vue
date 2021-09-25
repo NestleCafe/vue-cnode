@@ -5,6 +5,8 @@
         <div class="content" v-else>
                 <topic-header :postData="postData"></topic-header>
                 <topic-reply :postData="postData"></topic-reply>
+
+                
         </div>
     </div>
 </template>

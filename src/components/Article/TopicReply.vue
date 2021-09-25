@@ -1,9 +1,12 @@
 <template>
   <div class="topic_reply">
-    <div class="header">{{ postData.reply_count }} 回复</div>
+    <basic-container>
+      <template v-slot:header>
+        {{ postData.reply_count }} 回复
+      </template>
 
-    <div class="reply">
-      <ul>
+      <template v-slot:main>
+      <ul class="reply-item">
         <li v-for="(item, index) in postData.replies" :key="index">
           <router-link :to="`/user/${item.author.loginname}`">
             <img :src="item.author.avatar_url" :title="item.author.loginname" />
@@ -26,8 +29,10 @@
           </div>
           <div class="reply-content" v-html="item.content"></div>
         </li>
-      </ul>
-    </div>
+      </ul>        
+      </template>
+    </basic-container>
+    
   </div>
 </template>
 
@@ -45,17 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
-.topic_reply {
-  margin-top: 15px;
-  border-radius: $borderRadius $borderRadius 0 0;
-  .header {
-    border-radius: $borderRadius $borderRadius 0 0;
-    background: #f6f6f6;
-    padding: $globalPadding;
-    color: #444;
-    font-size: 14px;
-  }
-  .reply {
+.reply-item {
     background: white;
     li {
       border-bottom: 1px solid $borderColor;
@@ -98,7 +93,7 @@ export default {
       }
     }
   }
-}
+
 .reply-content::v-deep img {
   /* 100% - padding - text-indent */
   max-width: calc(100% - 10px - 1em);
