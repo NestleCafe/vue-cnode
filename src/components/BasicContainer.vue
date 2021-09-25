@@ -30,6 +30,7 @@ export default {};
   }
   .main{
     background: white;
+    padding: $globalPadding;
     width: 100%;
   }
 }
