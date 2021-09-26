@@ -6,29 +6,33 @@
       <template v-slot:main>
         <ul class="reply-item">
           <li v-for="(item, index) in postData.replies" :key="index">
-            <router-link :to="`/user/${item.author.loginname}`">
-              <img
-                :src="item.author.avatar_url"
-                :title="item.author.loginname"
-              />
-            </router-link>
-            <div class="userInfo">
-              <div class="item-left">
-                <span class="author">
-                  <router-link :to="`/user/${item.author.loginname}`">
-                    {{ item.author.loginname }}
-                  </router-link>
-                </span>
-                <span class="replyTime">
-                  {{ index + 1 }}楼• {{ timeToNow(item.create_at) }}
-                </span>
-              </div>
-              <div class="item-right">
-                <icon name="up"></icon>
-                <span class="text">{{ item.ups.length }}</span>
+            <div class="item-top">
+              <router-link :to="`/user/${item.author.loginname}`">
+                <img
+                  :src="item.author.avatar_url"
+                  :title="item.author.loginname"
+                />
+              </router-link>
+              <div class="userInfo">
+                <div class="item-left">
+                  <span class="author">
+                    <router-link :to="`/user/${item.author.loginname}`">
+                      {{ item.author.loginname }}
+                    </router-link>
+                  </span>
+                  <span class="replyTime">
+                    {{ index + 1 }}楼• {{ timeToNow(item.create_at) }}
+                  </span>
+                </div>
+
+                <div class="item-right">
+                  <icon name="up"></icon>
+                  <span class="text">{{ item.ups.length }}</span>
+                </div>
               </div>
             </div>
-            <div class="reply-content" v-html="item.content"></div>
+
+            <div class="item-bottom reply-content" v-html="item.content"></div>
           </li>
         </ul>
       </template>
@@ -51,8 +55,8 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
-.topic_reply::v-deep{
-  .container .main{
+.topic_reply::v-deep {
+  .container .main {
     padding: 0;
   }
 }
@@ -60,7 +64,7 @@ export default {
 .reply-item {
   background: white;
   li {
-    &:not(:first-child){
+    &:not(:first-child) {
       border-top: 1px solid $borderColor;
     }
     padding: $globalPadding;

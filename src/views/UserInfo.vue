@@ -40,6 +40,9 @@
           </topics-list-component>
         </div>
       </div>
+      <div class="slideBar">
+        <user-info-slide-bar :userData="userData"></user-info-slide-bar>
+      </div>
 
     </div>
   </div>
@@ -50,9 +53,11 @@ import { getUserInfo } from "@/api/index";
 import Loading from "@/components/Loading";
 import timeToNow from "@/utils/timeToNow";
 import TopicsListComponent from "@/components/TopicsListComponent";
+import UserInfoSlideBar from '@/components/UserInfo/UserInfoSlideBar'
+
 export default {
   name: "userInfo",
-  components: { Loading, TopicsListComponent },
+  components: { Loading, TopicsListComponent, UserInfoSlideBar },
   data() {
     return {
       isloading: true,
@@ -78,8 +83,12 @@ export default {
 @import "~@/assets/style/helper.scss";
 
 .content{
+  display: flex;
   .main{
     margin-top: 0;
+  }
+  .slideBar {
+    margin-left: 20px;
   }
 }
 .nav {
