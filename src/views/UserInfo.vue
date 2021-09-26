@@ -3,38 +3,42 @@
     <Loading v-if="isloading"></Loading>
 
     <div class="content" v-else>
-      <basic-container>
-        <template v-slot:header>
-          <ul class="nav">
-            <li><router-link :to="'/'">主页 </router-link></li>
-            <li>/</li>
-          </ul>
-        </template>
+      <div class="main">
+        <basic-container>
+          <template v-slot:header>
+            <ul class="nav">
+              <li>
+                <router-link :to="'/'">主页 </router-link>
+              </li>
+              <li>/</li>
+            </ul>
+          </template>
 
-        <template v-slot:main>
-          <div class="userinfo">
-            <div class="top">
-              <img :src="userData.avatar_url" />
-              <p>{{ userData.loginname }}</p>
+          <template v-slot:main>
+            <div class="userinfo">
+              <div class="top">
+                <img :src="userData.avatar_url" />
+                <p>{{ userData.loginname }}</p>
+              </div>
+              <div class="score">{{ userData.score }} 积分</div>
+              <div class="create_at">
+                注册时间{{ " " + timeToNow(userData.create_at) }}
+              </div>
             </div>
-            <div class="score">{{ userData.score }} 积分</div>
-            <div class="create_at">
-              注册时间{{ " " + timeToNow(userData.create_at) }}
-            </div>
-          </div>
-        </template>
-      </basic-container>
+          </template>
+        </basic-container>
 
-      <div class="recent_topics topicsList">
-        <topics-list-component :postData="userData.recent_topics">
-          <template v-slot:header> 最近创建的话题 </template>
-        </topics-list-component>
-      </div>
+        <div class="recent_topics topicsList">
+          <topics-list-component :postData="userData.recent_topics">
+            <template v-slot:header> 最近创建的话题 </template>
+          </topics-list-component>
+        </div>
 
-      <div class="recent_replies topicsList">
-        <topics-list-component :postData="userData.recent_replies">
-          <template v-slot:header> 最近参与的话题 </template>
-        </topics-list-component>
+        <div class="recent_replies topicsList">
+          <topics-list-component :postData="userData.recent_replies">
+            <template v-slot:header> 最近参与的话题 </template>
+          </topics-list-component>
+        </div>
       </div>
 
     </div>
@@ -73,6 +77,11 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
+.content{
+  .main{
+    margin-top: 0;
+  }
+}
 .nav {
   display: flex;
   font-size: 14px;

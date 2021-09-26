@@ -36,6 +36,7 @@ export default {
     width: 32px;
     line-height: 12px;
     white-space: nowrap;
+    margin: 0 10px;
     &.normal{
         background: $borderColor;
         color: #999;

@@ -66,9 +66,8 @@
 export default {
   name: "ArticleSlideBar",
   props: ["userData"],
-  methods: {
-  },
   computed: {
+    //限制侧边栏的最近创建与参与话题小于等于5条
     recentTopics(){
       let recentTopics = this.userData.recent_topics
       if(recentTopics){
@@ -101,22 +100,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
-
 $slidebarWidth: 290px;
-%widthReset {
-  .container {
-    max-width: $slidebarWidth;
-    min-width: $slidebarWidth;;
-    .header {
-      max-width: $slidebarWidth;
-      min-width: $slidebarWidth;
-    }
-    .main {
-      max-width: $slidebarWidth;
-      min-width: $slidebarWidth;
-    }
-  }
-}
 
 .autherInof {
   width: $slidebarWidth;
@@ -142,6 +126,21 @@ $slidebarWidth: 290px;
 .recent_relies, .recent_topics{
   .item{
     padding: 5px 0;
+  }
+}
+
+%widthReset {
+  .container {
+    max-width: $slidebarWidth;
+    min-width: $slidebarWidth;;
+    .header {
+      max-width: $slidebarWidth;
+      min-width: $slidebarWidth;
+    }
+    .main {
+      max-width: $slidebarWidth;
+      min-width: $slidebarWidth;
+    }
   }
 }
 .authersummary::v-deep {

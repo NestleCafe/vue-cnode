@@ -66,13 +66,8 @@ export default {
     font-size: 22px;
     font-weight: 700;
     margin: 8px 0;
-    position: relative;
-    .Category {
-      position: absolute;
-    }
+    display: flex;
     .title {
-      margin-left: 8px;
-      text-indent: 1.5em;
       @extend %textOverFlow;
       -webkit-line-clamp: 2;
     }

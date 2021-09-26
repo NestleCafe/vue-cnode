@@ -5,7 +5,8 @@
     <div class="content" v-else>
       <div class="main">
         <topic-header :postData="postData"></topic-header>
-        <topic-reply :postData="postData"></topic-reply>
+        <topic-reply v-if="postData.reply_count"
+          :postData="postData"></topic-reply>
       </div>
 
       <div class="slideBar">
@@ -58,6 +59,9 @@ export default {
 @import "~@/assets/style/helper.scss";
 .content {
   display: flex;
+  .main{
+    margin-top: 0;
+  }
   .slideBar {
     margin-left: 20px;
   }

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    
+  <div class="container">
     <basic-container>
       <template v-slot:header>
         <slot name="header"></slot>
@@ -8,33 +7,45 @@
       <template v-slot:main>
         <ul class="content-wrapper" v-if="postData">
           <li class="content" v-for="item in postData" :key="item.id">
-            <!-- 头像 -->
-            <router-link :to="`/user/${item.author.loginname}`">
-              <img
-                :src="item.author.avatar_url"
-                :title="item.author.loginname"
-              />
-            </router-link>
+            <div class="item-left">
+              <!-- 头像 -->
+              <router-link :to="`/user/${item.author.loginname}`">
+                <img
+                  :src="item.author.avatar_url"
+                  :title="item.author.loginname"
+                />
+              </router-link>
+              <!-- 回复/浏览 次数 -->
+              <div class="count" 
+                v-if="item.visit_count || item.visit_count === 0"
+              >
+                <p class="reply_count">
+                  {{ item.reply_count }}
+                </p>
+                <p>/</p>
+                <p class="visit_count">
+                  {{ item.visit_count }}
+                </p>
+              </div>
+              <!-- 分类 -->
+              <Category :data="item" v-if="categoryStatus(item)"></Category>
 
-            <!-- 分类 -->
-            <Category :data="item" v-if="categoryStatus(item)"></Category>
-
-            <!-- 文字 -->
-            <div class="text">
+              <!-- 标题 -->
               <router-link :to="`/topic/${item.id}`" :title="item.title">
                 <p class="title">{{ item.title }}</p>
               </router-link>
-              <div class="info">
-                <span class="item-right">
-                  {{ timeToNow(item.last_reply_at) }}
-                </span>
-              </div>
+            </div>
+
+            <div class="item-right">
+              <!-- 最后回复时间 -->
+              <span class="reply_at">
+                {{ timeToNow(item.last_reply_at) }}
+              </span>
             </div>
           </li>
         </ul>
       </template>
     </basic-container>
-
   </div>
 </template>
 
@@ -43,7 +54,7 @@ import timeToNow from "@/utils/timeToNow";
 import Category from "./Category.vue";
 export default {
   name: "postListComponent",
-  components: { Category, },
+  components: { Category },
   props: ["postData"],
   methods: {
     timeToNow,
@@ -60,6 +71,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+.container::v-deep {
+  .container .main {
+    padding: 0;
+  }
+}
 
 .content {
   padding: 10px;
@@ -68,14 +84,30 @@ export default {
   background: white;
   display: flex;
   position: relative;
-  img {
-    width: 30px;
-    margin-right: 10px;
-    border-radius: $borderRadius;
-  }
+  align-items: center;
+  justify-content: space-between;
 
-  .text {
-    margin-left: 10px;
+  .item-left {
+    display: flex;
+    align-items: center;
+    img {
+      width: 30px;
+      border-radius: $borderRadius;
+      margin: 0 10px;
+    }
+    .count {
+      display: flex;
+      font-size: 14px;
+      color: #333;
+      align-items: center;
+      .reply_count {
+        color: #9e78c0;
+      }
+      .visit_count {
+        font-size: 10px;
+        color: #b4b4b4;
+      }
+    }
     .title {
       color: #888;
       font-size: 16px;
@@ -85,27 +117,11 @@ export default {
         text-decoration: underline;
       }
     }
-    .info {
-      font-size: 10px;
-      display: flex;
-      .item-left {
-        p {
-          display: inline-block;
-        }
-        .reply_count {
-          color: #9e78c0;
-        }
-        .visit_count {
-          color: #b4b4b4;
-        }
-      }
-      .item-right {
-        position: absolute;
-        right: 10px;
-        font-size: 10px;
-        color: #778087;
-      }
-    }
+  }
+
+  .item-right {
+    font-size: 10px;
+    display: flex;
   }
 }
 </style>
