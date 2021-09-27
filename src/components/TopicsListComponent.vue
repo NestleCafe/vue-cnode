@@ -93,13 +93,14 @@ export default {
     img {
       width: 30px;
       border-radius: $borderRadius;
-      margin: 0 10px;
     }
     .count {
       display: flex;
       font-size: 14px;
+      min-width: 70px;
       color: #333;
       align-items: center;
+      justify-content: center;
       .reply_count {
         color: #9e78c0;
       }

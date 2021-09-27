@@ -30,27 +30,35 @@ export default {
       isLoading: null,
       //当前文章页数据
       postData: {},
+      //侧边栏作者信息
       authorData: {},
     };
   },
   methods: {
-    //获取作者信息,侧边栏用
+    //获取作者信息
     async getUserInfo(loginname) {
       const res = await getUserInfo(loginname);
       this.authorData = res.data.data;
-      console.log(this.authorData);
     },
-
+    //获取当前文章页数据
     async getData(id) {
       this.isLoading = true;
       const res = await getArticleDate(id);
       this.postData = res.data.data;
+      //获得作者ID后调用getUserInfo()
       this.getUserInfo(this.postData.author.loginname);
       this.isLoading = false;
     },
   },
   created() {
     this.getData(this.$route.params.id);
+  },
+  watch: {
+    //路由监听来去
+    '$route'(to, from){
+      let hash = to.fullPath.slice(7)
+      this.getData(hash)
+    }
   },
 };
 </script>

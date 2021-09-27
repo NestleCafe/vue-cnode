@@ -69,27 +69,19 @@ export default {
   computed: {
     //限制侧边栏的最近创建与参与话题小于等于5条
     recentTopics(){
-      let recentTopics = this.userData.recent_topics
-      if(recentTopics){
-        let length = recentTopics.length >= 5 ? 5 : recentTopics.length
-        if(length === 0){
-          return false
-        }else{
-          return recentTopics.splice(0, length)
-        }        
+      let topics = this.userData.recent_topics
+      if(topics && topics.length !== 0){
+        let length = topics.length >= 5 ? 5 : topics.length
+        return topics.splice(0, length)
       }else{
         return false
       }
     },
     recentReplies(){
-      let recentReplies = this.userData.recent_replies
-      if(recentReplies){
-        let length = recentReplies.length >= 5 ? 5 : recentReplies.length
-        if(length === 0){
-          return false
-        }else{
-          return recentReplies.splice(0, length)
-        }
+      let replies = this.userData.recent_replies
+      if(replies && replies.length !== 0){
+        let length = replies.length >= 5 ? 5 : replies.length
+        return replies.splice(0, length)
       }else{
         return false
       }

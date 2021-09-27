@@ -18,7 +18,7 @@
               </router-link>
             </li>
             <li>{{ postData.visit_count }} 次浏览</li>
-            <li>来自 {{ comeFrom }}</li>
+            <li v-if="comeFrom">来自 {{ comeFrom }}</li>
           </ul>
         </div>
       </template>
@@ -38,19 +38,29 @@ export default {
   name: "Topic-Header",
   components: { Category },
   props: ["postData"],
+  data(){
+    return {
+      tabTable: {
+        share : "分享",
+        ask : '问答',
+        job : '招聘',
+        dev : '客户端测试',
+      },
+    }
+  },
   methods: {
     timeToNow,
   },
   computed: {
     comeFrom() {
       const tab = this.postData.tab;
-      if (tab === "share") {
-        return "分享";
-      } else if (tab === "ask") {
-        return "问答";
-      } else {
-        return null;
+      const tabTable = this.tabTable
+      for(let key in tabTable){
+        if(key === tab){
+          return tabTable[key]
+        }
       }
+      return null
     },
   },
 };
