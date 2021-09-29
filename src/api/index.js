@@ -1,10 +1,12 @@
 import axios from "axios";
 
+export const BASE_URL = 'https://cnodejs.org'
+
 /* api文档 https://cnodejs.org/api */
-const BASE_URL = 'https://cnodejs.org/api/v1'
+export const apiUrl = BASE_URL + '/api/v1'
 
 function request(url, params){
-    const fullUrl = BASE_URL + url
+    const fullUrl = apiUrl + url
     return axios.get(fullUrl, params)
 }
 /* 获取帖子列表 */
@@ -20,7 +22,7 @@ export function getPostList(page, tab){
         params:{
             page,
             tab,
-            limit: 40,
+            limit: 25,
         }
     })
 }

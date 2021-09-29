@@ -35,9 +35,9 @@ export default {
   components: { Loading, TopicsListComponent, Pagination },
   data() {
     return {
-      //是否加载
+      //是否显示加载动画
       isLoading: null,
-      //列表头导航
+      //导航内容
       headerContent,
       //选中的列表头
       headerIndex: 0,
@@ -51,32 +51,35 @@ export default {
   },
   methods: {
     timeToNow,
-    async getPostList(page) {
+    //渲染话题列表
+    async getPostList(page, tab) {
       this.isLoading = true;
-      const res = await getPostList(page);
+      const res = await getPostList(page, tab);
       const data = res.data.data;
       this.postList = data;
       this.isLoading = false;
     },
+    //切换Tag
     changeTag(item, index) {
       this.headerIndex = index;
       this.postTab = item.tab
-      
+      //切换前先将页码置为1
+      this.postPage = 1
+      console.log('postTab:',this.postTab)
+      this.getPostList(this.postPage, this.postTab)    
     },
   },
   mounted() {
     this.getPostList(this.postPage);
   },
   watch:{
-    postPage(){
-      console.log('postPage:',this.postPage)
-      this.getPostList(this.postPage)
+    postPage:{
+      immediate: true,
+      handler(){
+        console.log('postPage:',this.postPage, '   postTab:',this.postTab)
+        this.getPostList(this.postPage)
+      }
     },
-    postTab(){
-      console.log('postTab:',this.postTab)
-      this.postPage = 1
-      this.getPostList(this.postPage, this.postTab)
-    }
   }
 };
 </script>
@@ -100,6 +103,7 @@ export default {
   }
   &:not(.selected):hover {
     color: #005580;
+    cursor: pointer;
   }
 }
 </style>
