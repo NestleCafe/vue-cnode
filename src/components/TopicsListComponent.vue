@@ -82,13 +82,14 @@ export default {
 .content {
   padding: 10px;
   height: 50px;
-  border-bottom: 1px solid #f0f0f0;
   background: white;
   display: flex;
   position: relative;
   align-items: center;
   justify-content: space-between;
-
+  &:not(:last-child){
+    border-bottom: 1px solid #f0f0f0;
+  }
   .item-left {
     display: flex;
     align-items: center;

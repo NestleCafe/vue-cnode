@@ -17,7 +17,6 @@ export default {};
 @import "~@/assets/style/helper.scss";
 .container {
   margin-top: 20px;
-  margin-bottom: 20px;
   width: 100%;
   .header {
     border-radius: $borderRadius $borderRadius 0 0;

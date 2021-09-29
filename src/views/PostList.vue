@@ -1,19 +1,24 @@
 <template>
   <div class="container">
     <Loading v-if="isLoading"></Loading>
-    <topics-list-component :postData="postList" v-else>
-      <template v-slot:header>
-        <span
-          v-for="(item, index) in headerContent"
-          :key="index"
-          @click="handleClick(item, index)"
-          class="item"
-          :class="{ selected: headerIndex === index }"
-        >
-          {{ item.text }}
-        </span>
-      </template>
-    </topics-list-component>
+  <div class="content" v-else>
+        <topics-list-component :postData="postList">
+        <template v-slot:header>
+          <span
+            v-for="(item, index) in headerContent"
+            :key="index"
+            @click="changeTag(item, index)"
+            class="item"
+            :class="{ selected: headerIndex === index }"
+          >
+            {{ item.text }}
+          </span>
+        </template>
+      </topics-list-component>
+      <Pagination 
+        :currentPage.sync="postPage"
+      ></Pagination>
+  </div>
   </div>
 </template>
 
@@ -22,11 +27,12 @@ import { getPostList } from "@/api/index";
 import headerContent from "@/utils/PostList/headerContent";
 import Loading from "@/components/Loading";
 import timeToNow from "@/utils/timeToNow";
-import TopicsListComponent from "@/components/TopicsListComponent.vue";
+import TopicsListComponent from "@/components/TopicsListComponent";
+import Pagination from "@/components/Pagination";
 
 export default {
   name: "PostList",
-  components: { Loading, TopicsListComponent },
+  components: { Loading, TopicsListComponent, Pagination },
   data() {
     return {
       //是否加载
@@ -37,26 +43,41 @@ export default {
       headerIndex: 0,
       //页面列表数据
       postList: [],
+      //页面页数
+      postPage: 1,
+      //页面tag
+      postTab: 'all'
     };
   },
   methods: {
     timeToNow,
-    async getPostList(tab) {
-      tab = tab || "all";
+    async getPostList(page) {
       this.isLoading = true;
-      const res = await getPostList(tab);
+      const res = await getPostList(page);
       const data = res.data.data;
       this.postList = data;
       this.isLoading = false;
     },
-    handleClick(item, index) {
+    changeTag(item, index) {
       this.headerIndex = index;
-      /* this.getPostList(item.tab) */
+      this.postTab = item.tab
+      
     },
   },
   mounted() {
-    this.getPostList();
+    this.getPostList(this.postPage);
   },
+  watch:{
+    postPage(){
+      console.log('postPage:',this.postPage)
+      this.getPostList(this.postPage)
+    },
+    postTab(){
+      console.log('postTab:',this.postTab)
+      this.postPage = 1
+      this.getPostList(this.postPage, this.postTab)
+    }
+  }
 };
 </script>
 
