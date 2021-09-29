@@ -43,6 +43,7 @@
               </span>
             </div>
           </li>
+          <li v-if="!postData[0]" class="content">无话题</li>
         </ul>
       </template>
     </basic-container>
@@ -75,9 +76,6 @@ export default {
   .container .main {
     padding: 0;
   }
-}
-.container{
-  min-width: 635px;
 }
 .content {
   padding: 10px;

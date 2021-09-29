@@ -76,6 +76,12 @@ export default {
   created() {
     this.getUserInfo(this.$route.params.loginname);
   },
+  watch: {
+    '$route'(to, from){
+      let hash = to.fullPath.slice(6)
+      this.getUserInfo(hash)
+    }
+  },  
 };
 </script>
 
@@ -86,6 +92,7 @@ export default {
   display: flex;
   .main{
     margin-top: 0;
+    flex-grow: 1;
   }
   .slideBar {
     margin-left: 20px;
@@ -126,10 +133,15 @@ export default {
 }
 
 .topicsList::v-deep {
-  .content .text .title {
-    color: #08c;
-    &:hover {
-      color: #005580;
+  .content{
+    .title {
+      color: #08c;
+      &:hover {
+        color: #005580;
+      }
+    }
+    .item-left img{
+      margin-right: 10px;
     }
   }
 }

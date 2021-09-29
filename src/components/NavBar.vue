@@ -5,28 +5,41 @@
         <router-link :to="'/'"
           ><img src="@/assets/cnodejs_light.svg" class="logo"
         /></router-link>
-        <!-- <form method="get" action="https://www.google.com.hk/search" >
-                    <input name="q" type="text" class="search">
-                
-                </form> -->
-        <!-- {{site:cnodejs.org}} -->
       </div>
 
       <ul class="items-right">
         <li><router-link :to="'/'">首页</router-link></li>
-        <li><a href="https://cnodejs.org/getstart" title="跳转至cnode">新手入门</a></li>
-        <li><a href="https://cnodejs.org/api" title="跳转至cnode">API</a></li>
-        <li><a href="https://cnodejs.org/about" title="跳转至cnode">关于</a></li>
-        <li><a href="https://cnodejs.org/signup" title="跳转至cnode">注册</a></li>
-        <li><a href="https://cnodejs.org/signin" title="跳转至cnode">登录</a></li>
+        <li v-for="(content, index) in NavBarContent"
+          :key="index"
+          title="将会跳转至cnodejs.org"
+        >
+          <a :href="content.url">
+            {{content.title}}
+          </a>
+        </li>
       </ul>
+      
     </div>
+    
   </div>
 </template>
 
 <script>
+import NavBarContent from '@/utils/NavBar/NavBarContent'
+
 export default {
   name: "Header",
+  data(){
+    return{
+      NavBarContent,
+    }
+  },
+  methods:{
+    addClass(className){
+      this.$refs.search.setAttribute("class",`search ${className}`);
+      console.log(this.$refs.search)
+    }
+  },
 };
 </script>
 
@@ -55,10 +68,10 @@ export default {
         margin-left: 20px;
         border-radius: 50px;
         border: none;
-        /* text-indent: 1.5em; */
+        text-indent: 1.5em;
         width: 233px;
         height: 26px;
-        /* background: #888888; */
+        background: #888888;
         padding: 3px 5px 3px 22px;
       }
     }
@@ -74,13 +87,4 @@ export default {
     }
   }
 }
-
-/* @keyframes colorChange{
-    from{
-        background: #888888;
-    }
-    to{
-        background: white;
-    }
-} */
 </style>

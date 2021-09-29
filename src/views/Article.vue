@@ -67,8 +67,10 @@ export default {
 @import "~@/assets/style/helper.scss";
 .content {
   display: flex;
+
   .main{
     margin-top: 0;
+    flex-grow: 1;
   }
   .slideBar {
     margin-left: 20px;
