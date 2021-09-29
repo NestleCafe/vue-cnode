@@ -51,35 +51,6 @@
 export default {
   name: "ArticleSlideBar",
   props: ["userData"],
-  computed: {
-    //限制侧边栏的最近创建与参与话题小于等于5条
-    recentTopics(){
-      let recentTopics = this.userData.recent_topics
-      if(recentTopics){
-        let length = recentTopics.length >= 5 ? 5 : recentTopics.length
-        if(length === 0){
-          return false
-        }else{
-          return recentTopics.splice(0, length)
-        }        
-      }else{
-        return false
-      }
-    },
-    recentReplies(){
-      let recentReplies = this.userData.recent_replies
-      if(recentReplies){
-        let length = recentReplies.length >= 5 ? 5 : recentReplies.length
-        if(length === 0){
-          return false
-        }else{
-          return recentReplies.splice(0, length)
-        }
-      }else{
-        return false
-      }
-    }
-  },
 };
 </script>
 

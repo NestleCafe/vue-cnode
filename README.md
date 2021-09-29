@@ -1,4 +1,6 @@
 # vue-cnode
+[预览链接](https://nestlecafe.github.io/vue-cnode-website/)
+
 
 *vue 2.0 + Axios + Vue-router实现CNode社区*
 

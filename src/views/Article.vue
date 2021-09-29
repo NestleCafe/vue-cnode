@@ -55,7 +55,7 @@ export default {
   },
   watch: {
     //路由监听来去
-    '$route'(to, from){
+    '$route'(to){
       let hash = to.fullPath.slice(7)
       this.getData(hash)
     }
@@ -71,6 +71,7 @@ export default {
   .main{
     margin-top: 0;
     flex-grow: 1;
+    margin-bottom: 20px;
   }
   .slideBar {
     margin-left: 20px;
