@@ -1,64 +1,66 @@
 <template>
-  <div class="autherInof">
-    <div class="authersummary">
-      <basic-container>
-        <template v-slot:header> 作者 </template>
-        <template v-slot:main>
-          <div class="userinfo">
-            <div class="top">
-              <img :src="userData.avatar_url" />
-              <p>
-                <router-link :to="`/user/${userData.loginname}`">
-                  {{ userData.loginname }}
-                </router-link>
-              </p>
+  <div class="container">
+    <div class="auther">
+      <div class="authersummary">
+        <basic-container>
+          <template v-slot:header> 作者 </template>
+          <template v-slot:main>
+            <div class="userinfo">
+              <div class="top">
+                <img :src="userData.avatar_url" />
+                <p>
+                  <router-link :to="`/user/${userData.loginname}`">
+                    {{ userData.loginname }}
+                  </router-link>
+                </p>
+              </div>
+              <div class="score"> 积分: {{ userData.score }}</div>
             </div>
-            <div class="score"> 积分: {{ userData.score }}</div>
-          </div>
-        </template>
-      </basic-container>
-    </div>
-
-    <div class="recent_topics">
-      <basic-container>
-        <template v-slot:header> 最近创建的话题 </template>
-        <template v-slot:main>
-          <ul v-if="recentTopics">
-            <li v-for="reply in recentTopics" 
-              :key="reply.id"
-              class="item"
-            >
-              <router-link :to="`/topic/${reply.id}`">
-                {{reply.title}}
-              </router-link>
-            </li>
-          </ul>
-          <span v-else>无</span>      
           </template>
-      </basic-container>
+        </basic-container>
+      </div>
+
+      <div class="recent_topics">
+        <basic-container>
+          <template v-slot:header> 最近创建的话题 </template>
+          <template v-slot:main>
+            <ul v-if="recentTopics">
+              <li v-for="reply in recentTopics" 
+                :key="reply.id"
+                class="item"
+              >
+                <router-link :to="`/topic/${reply.id}`">
+                  {{reply.title}}
+                </router-link>
+              </li>
+            </ul>
+            <span v-else>无</span>      
+            </template>
+        </basic-container>
+      </div>
+
+
+
+      <div class="recent_relies">
+        <basic-container>
+          <template v-slot:header> 最近参与的话题 </template>
+          <template v-slot:main>
+            <ul v-if="recentReplies">
+              <li v-for="reply in recentReplies" 
+                :key="reply.id"
+                class="item"
+              >
+                <router-link :to="`/topic/${reply.id}`">
+                  {{reply.title}}
+                </router-link>
+              </li>
+            </ul>
+            <span v-else>无</span>      
+            </template>
+        </basic-container>
+      </div>
+
     </div>
-
-
-
-    <div class="recent_relies">
-      <basic-container>
-        <template v-slot:header> 最近参与的话题 </template>
-        <template v-slot:main>
-          <ul v-if="recentReplies">
-            <li v-for="reply in recentReplies" 
-              :key="reply.id"
-              class="item"
-            >
-              <router-link :to="`/topic/${reply.id}`">
-                {{reply.title}}
-              </router-link>
-            </li>
-          </ul>
-          <span v-else>无</span>      
-          </template>
-      </basic-container>
-    </div>
-
   </div>
 </template>
 
@@ -94,7 +96,7 @@ export default {
 @import "~@/assets/style/helper.scss";
 $slidebarWidth: 290px;
 
-.autherInof {
+.auther {
   width: $slidebarWidth;
   font-size: 13px;
 }
@@ -116,41 +118,11 @@ $slidebarWidth: 290px;
   }
 }
 .recent_relies, .recent_topics{
-  .item{
-    padding: 5px 0;
-  }
-}
-
-%widthReset {
-  .container {
-    max-width: $slidebarWidth;
-    min-width: $slidebarWidth;;
-    .header {
-      max-width: $slidebarWidth;
-      min-width: $slidebarWidth;
-    }
-    .main {
-      max-width: $slidebarWidth;
-      min-width: $slidebarWidth;
+  ul{
+    display: inline-block;
+    .item{
+      padding: 5px 0;
     }
   }
-}
-.authersummary::v-deep {
-  @extend %widthReset;
-  .main{
-    @extend %widthReset;
-  }
-}
-.recent_topics::v-deep {
-  @extend %widthReset;
-  .main{
-    @extend %widthReset;
-  }
-}
-.recent_relies::v-deep {
-  @extend %widthReset;
-  .main{
-    @extend %widthReset;
-  }  
 }
 </style>

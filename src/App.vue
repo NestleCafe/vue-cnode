@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <div class="main">
+    <div class="global-main">
       <router-view></router-view>
     </div>
   </div>
@@ -23,9 +23,14 @@ export default {
 body{
   background: $backgroundColor;
 }
-.main{
+.global-main{
   width: 80%;
-  min-width: 635px;
+  max-width: 1400px;
   margin: auto;
+}
+@media (max-width: 980px) {
+    .global-main{
+      width: 98%;
+    }
 }
 </style>

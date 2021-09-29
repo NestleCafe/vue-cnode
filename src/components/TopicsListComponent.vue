@@ -76,7 +76,9 @@ export default {
     padding: 0;
   }
 }
-
+.container{
+  min-width: 635px;
+}
 .content {
   padding: 10px;
   height: 50px;

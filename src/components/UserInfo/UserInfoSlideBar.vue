@@ -90,6 +90,25 @@ $slidebarWidth: 290px;
 .container {
   width: $slidebarWidth;
   font-size: 13px;
+  .authersummary{
+    .userinfo{
+      .top{
+        display: flex;
+        align-items: center;
+        color: #778087;
+        font-size: 16px;
+        img{
+          width: 48px;
+          margin-right: 10px;
+        }
+      }
+      .score{
+        margin-top: 10px;
+        color: #333;
+        font-size: 14px;
+      }
+    }
+  }
   .friendlyPage{
     li{
       &:not(:first-child){
@@ -102,30 +121,9 @@ $slidebarWidth: 290px;
   }
 }
 
-%widthReset {
-  .container {
-    max-width: $slidebarWidth;
-    min-width: $slidebarWidth;;
-    .header {
-      max-width: $slidebarWidth;
-      min-width: $slidebarWidth;
+@media (max-width: 980px) {
+    .container{
+      display: none;
     }
-    .main {
-      max-width: $slidebarWidth;
-      min-width: $slidebarWidth;
-    }
-  }
-}
-.authersummary::v-deep {
-  @extend %widthReset;
-  .main{
-    @extend %widthReset;
-  }
-}
-.friendlyPage::v-deep {
-  @extend %widthReset;
-  .main{
-    @extend %widthReset;
-  }
 }
 </style>

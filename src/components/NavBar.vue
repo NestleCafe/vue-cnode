@@ -13,12 +13,12 @@
       </div>
 
       <ul class="items-right">
-        <li><a href="https://cnodejs.org/">首页</a></li>
-        <li><a href="https://cnodejs.org/getstart">新手入门</a></li>
-        <li><a href="https://cnodejs.org/api">API</a></li>
-        <li><a href="https://cnodejs.org/about">关于</a></li>
-        <li><a href="https://cnodejs.org/signup">注册</a></li>
-        <li><a href="https://cnodejs.org/signin">登录</a></li>
+        <li><router-link :to="'/'">首页</router-link></li>
+        <li><a href="https://cnodejs.org/getstart" title="跳转至cnode">新手入门</a></li>
+        <li><a href="https://cnodejs.org/api" title="跳转至cnode">API</a></li>
+        <li><a href="https://cnodejs.org/about" title="跳转至cnode">关于</a></li>
+        <li><a href="https://cnodejs.org/signup" title="跳转至cnode">注册</a></li>
+        <li><a href="https://cnodejs.org/signin" title="跳转至cnode">登录</a></li>
       </ul>
     </div>
   </div>

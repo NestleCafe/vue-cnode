@@ -74,4 +74,14 @@ export default {
     margin-left: 20px;
   }
 }
+@media (max-width: 980px) {
+  .slideBar {
+    margin: 0 !important;
+  }
+  .slideBar::v-deep{
+    .container{
+      display: none;
+    }
+  }
+}
 </style>
