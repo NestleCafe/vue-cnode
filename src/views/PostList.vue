@@ -81,10 +81,15 @@ export default {
   mounted() {
     this.getPostList(this.postPage);
   },
-  updated() {
+  beforeRouteUpdate(to, from, next) {
+    this.postTab = to.query.tab || 'all'
+    this.postPage = to.query.page || '1'
+    next()
+  },
+  /* updated() {
     const tab = window.location.hash.slice(-3)
     this.postTab = tab
-  },
+  }, */
   watch:{
     postPage:{
       handler(){
