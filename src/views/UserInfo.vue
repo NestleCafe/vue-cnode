@@ -77,9 +77,9 @@ export default {
     this.getUserInfo(this.$route.params.loginname);
   },
   watch: {
-    '$route'(to, from){
-      let hash = to.fullPath.slice(6)
-      this.getUserInfo(hash)
+    '$route'(to){
+      const id = to.params.id
+      this.getUserInfo(id)
     }
   },  
 };

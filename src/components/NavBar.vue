@@ -2,7 +2,13 @@
   <div class="container">
     <div class="container_inner">
       <div class="items-left">
-        <router-link :to="'/'"
+        <router-link :to="{
+          name: 'PostList',
+          query: {
+            page: 1,
+            tab: 'all'
+          }
+        }"
           ><img src="@/assets/cnodejs_light.svg" class="logo"
         /></router-link>
       </div>

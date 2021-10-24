@@ -9,8 +9,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    name: 'PostList',
     path:'/',
-    component: PostList,
+    component: PostList
   },
   {
     path: '/topic/:id',

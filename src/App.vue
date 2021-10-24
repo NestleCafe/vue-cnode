@@ -2,7 +2,9 @@
   <div id="app">
     <nav-bar></nav-bar>
     <div class="global-main">
-      <router-view></router-view>
+      <keep-alive include="PostList" :max='1'>
+        <router-view></router-view>
+      </keep-alive>
     </div>
   </div>
 </template>

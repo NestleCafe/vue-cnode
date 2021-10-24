@@ -51,13 +51,16 @@ export default {
     },
   },
   created() {
-    this.getData(this.$route.params.id);
+    this.getData(this.$route.params.id)
   },
   watch: {
     //路由监听来去
-    '$route'(to){
-      let hash = to.fullPath.slice(7)
-      this.getData(hash)
+    '$route': {
+      handler(to) {
+        const id = to.params.id
+        this.getData(id)
+      },
+      immediate: true
     }
   },
 };

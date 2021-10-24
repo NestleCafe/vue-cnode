@@ -68,22 +68,57 @@ export default {
       this.postTab = item.tab
       //切换前先将页码置为1
       this.postPage = 1
-      console.log('postTab:',this.postTab)
+      this.$router.push({
+        name: 'PostList',
+        query:{
+          page: this.postPage,
+          tab: this.postTab
+        }
+      })     
       this.getPostList(this.postPage, this.postTab)    
     },
   },
   mounted() {
     this.getPostList(this.postPage);
   },
+  updated() {
+    const tab = window.location.hash.slice(-3)
+    this.postTab = tab
+  },
   watch:{
     postPage:{
-      immediate: true,
       handler(){
-        console.log('postPage:',this.postPage, '   postTab:',this.postTab)
+        this.$router.push({
+          name: 'PostList',
+          query:{
+            page: this.postPage,
+            tab: this.postTab
+          }
+        })
         this.getPostList(this.postPage)
-      }
+      },
+      immediate: false
     },
-  }
+    postTab: {
+      handler(newVal) {
+        if(newVal === 'all'){
+          this.headerIndex = 0
+        }
+      },
+      immediate: true
+    },
+    //路由监听来去
+    '$route': {
+      handler(to) {
+        if(to.page){
+          this.postPage = to.page
+          this.postTab = to.tab ? to.tab : 'all'
+        }
+        this.getPostList(to.query.page, to.query.tab)
+      },
+      immediate: true
+    }
+  },
 };
 </script>
 
