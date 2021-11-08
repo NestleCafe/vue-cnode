@@ -1,14 +1,14 @@
 <template>
   <div class="pagination-wrapper">
     <ul class="Pagination">
-      <li :class="{ active: currentPage === 1 }"
+      <li :class="{ active: page === 1 }"
         @click="$emit('update:currentPage', 1)"
       >«</li>
       <li class="more prefix" v-if="page > 3">...</li>
       <li
         v-for="(pageItem, index) in pageList"
         :key="index"
-        :class="{ active: currentPage === pageItem }"
+        :class="{ active: page === pageItem }"
         class="pageList"
         @click="changePage(pageItem)"
       >
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     changePage(pageItem) {
-      if (this.currentPage === pageItem) {
+      if (this.page === pageItem) {
         return;
       } else {
         this.$emit("update:currentPage", pageItem);
@@ -41,7 +41,7 @@ export default {
   computed: {
     page: {
       get: function () {
-        return this.currentPage;
+        return parseInt(this.currentPage);
       },
     },
   },
@@ -49,13 +49,13 @@ export default {
     currentPage:{
         handler(){
           /* 分页组件样式逻辑 */
-          if (this.currentPage > 2) {
-            this.pageList[2] = this.currentPage;
+          if (this.page > 2) {
+            this.pageList[2] = this.page;
             this.pageList.splice(0, 2);
-            this.pageList.splice(0, 0, this.currentPage - 2, this.currentPage - 1);
+            this.pageList.splice(0, 0, this.page - 2, this.page - 1);
             this.pageList.splice(3, 2);
-            this.pageList.splice(3, 0, this.currentPage + 1, this.currentPage + 2);
-          } else if (this.currentPage === 2 && this.pageList[0] === 2) {
+            this.pageList.splice(3, 0, this.page + 1, this.page + 2);
+          } else if (this.page === 2 && this.page === 2) {
             this.pageList.splice(0, 0, 1);
             this.pageList.splice(4, 1);
           }          

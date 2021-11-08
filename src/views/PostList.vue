@@ -44,9 +44,9 @@ export default {
       //页面列表数据
       postList: [],
       //页面页数
-      postPage: 1,
+      postPage: this.$route.query.page || 1,
       //页面tag
-      postTab: 'all'
+      postTab: this.$route.query.tab || 'all'
     };
   },
   methods: {
@@ -80,16 +80,13 @@ export default {
   },
   mounted() {
     this.getPostList(this.postPage);
+    this.headerIndex = headerContent.findIndex(item => item.tab === this.postTab) || 0
   },
   beforeRouteUpdate(to, from, next) {
     this.postTab = to.query.tab || 'all'
     this.postPage = to.query.page || '1'
     next()
   },
-  /* updated() {
-    const tab = window.location.hash.slice(-3)
-    this.postTab = tab
-  }, */
   watch:{
     postPage:{
       handler(){
@@ -99,7 +96,7 @@ export default {
             page: this.postPage,
             tab: this.postTab
           }
-        })
+        }).catch(err=>err) // 防止报错(Avoided redundant navigation to current location )
         this.getPostList(this.postPage)
       },
       immediate: false
@@ -116,7 +113,7 @@ export default {
     '$route': {
       handler(to) {
         if(to.page){
-          this.postPage = to.page
+          this.postPage = parseInt(to.page)
           this.postTab = to.tab ? to.tab : 'all'
         }
         this.getPostList(to.query.page, to.query.tab)
